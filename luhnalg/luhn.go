@@ -25,8 +25,8 @@ func (this *LuhnAlgorithm) ComputeCheckDigit(number string) int{
 			currentDigit *= 2
 		}
 
-		if currentDigit > 9 {
-			currentDigit = currentDigit/10 + currentDigit%10
+		if isTwoDigit(currentDigit) {
+			currentDigit = getFirstDigit(currentDigit) + getSecondDigit(currentDigit)
 		}
 
 		sum += currentDigit
@@ -36,4 +36,16 @@ func (this *LuhnAlgorithm) ComputeCheckDigit(number string) int{
 	checkDigit := sum%10
 	return checkDigit
 
+}
+
+func isTwoDigit(n int) bool{
+	return n>9 && n<100
+}
+
+func getFirstDigit(n int) int{
+	return n/10
+}
+
+func getSecondDigit(n int) int{
+	return n%10
 }
